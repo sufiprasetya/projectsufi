@@ -1,0 +1,26 @@
+
+from Lib.handset.app.lib_datausage import *
+from Lib.handset.app.lib_Network import *
+
+class DataTest:
+
+    def InitializeBrowser(self, IMSI, MSISDN):
+        '''
+        Initializes the Chrome Browser by Closing all the tabs as prepares for the testcase.
+
+        [Input Description]
+            IMSI    : Test IMSI on the Selected Handset
+            MSISDN  : Corresponsing MSISDN
+
+        [Output Description]
+             Returns: PASS/FAIL
+        '''
+        LOG_INFO("[DataTest][IMSI:{0}]: Chrome Browser App".format(IMSI))
+        self.DUT1 = lib_datausage(IMSI, MSISDN)
+        resp = self.DUT1.close_all_tabs_in_browser()
+        if resp:
+            LOG_INFO("[DataTest][IMSI:{0}]: Ensuring all sessions of chrome app is closed - Success".format(IMSI))
+            return "PASS"
+        else:
+            LOG_INFO("[DataTest][IMSI:{0}]: Ensuring all sessions of chrome app is closed - Failed".format(IMSI))
+            return "FAIL"
